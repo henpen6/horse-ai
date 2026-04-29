@@ -47,6 +47,8 @@ See [`docs/v9_design.md`](docs/v9_design.md) §2 for full pipeline and `src/engi
 
 Detail per version, per-grade, per-year: [`docs/v9_design.md`](docs/v9_design.md) §1.1, §13.
 
+**For deep interpretive analysis** (per-grade narrative, year-by-year story, Kelly fix bug history, 2026 OOS surprise, methodology notes): see [`docs/version_results_analysis.md`](docs/version_results_analysis.md).
+
 ---
 
 ## Repository layout
@@ -73,6 +75,7 @@ Detail per version, per-grade, per-year: [`docs/v9_design.md`](docs/v9_design.md
 │   └── test_engine_phase2.py              # engine integration tests
 ├── docs/
 │   ├── v9_design.md                       # ★ v9 comprehensive design (English, ~5,000 words)
+│   ├── version_results_analysis.md         # ★ deep analysis: per-version × per-grade × per-year + findings
 │   ├── v841_kelly_redux_audit.md          # closed-loop validation report (v8.4.0 → v8.4.1 fix)
 │   └── v85_strategy_codex_research.md     # Codex deep research v8.5 strategy report
 └── harness/
