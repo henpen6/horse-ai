@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+.mypy_cache/
+
+# data files (private snapshots / cache)
+*.snapshot.json
+data/snapshots/
+data/cache/
+data/backtest_runs/

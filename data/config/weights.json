@@ -1,0 +1,283 @@
+{
+  "_comment": "EV engine tunable parameters — Track 1 autonomous evolution target. All values here are the authoritative source; ev.py falls back to these defaults if the file is missing.",
+  "_version": 1,
+  "_last_updated": "2026-04-28-v8.4.0",
+  "race_level": {
+    "lv1_lv2_boundary": 0.56,
+    "lv3_base_threshold": 0.74,
+    "lv3_max_threshold": 0.8,
+    "small_field_correction_rate": 0.02,
+    "small_field_reference_size": 11
+  },
+  "unknown_x": {
+    "weight_change_threshold_kg": 10,
+    "layoff_threshold_days": 90,
+    "distance_change_threshold_m": 400
+  },
+  "ev_model": {
+    "popularity_boost_divisor": 7.0,
+    "weight_factor_min": 0.88,
+    "weight_factor_base": 1.0,
+    "weight_factor_scale": 100
+  },
+  "ability": {
+    "scale": 0.15,
+    "career_weight": 0.5,
+    "class_weight": 0.5
+  },
+  "hard_skip": {
+    "_comment": "v8.2.0 deterministic SKIP gate (extended from v8.1). Validated on 2023+2024+2025 stakes (n=337): combined with v8.1 factor patch yields hit 43.0%, ROI 179.8%, profit +¥163,650 (vs v8.1 baseline +¥140,180, +¥23,470). See ps/tech_patterns.md.",
+    "enabled": true,
+    "rule_A_enabled": true,
+    "rule_A_max_odds": 2.5,
+    "rule_B_enabled": true,
+    "rule_B_grade": "G3",
+    "rule_B_pop": 2,
+    "rule_C_enabled": true,
+    "rule_D_enabled": true,
+    "rule_D_grade": "G3",
+    "rule_D_pop": 1,
+    "rule_I_enabled": true,
+    "rule_I_months": [
+      2,
+      10
+    ],
+    "rule_K_enabled": true,
+    "rule_K_grade": "G3",
+    "rule_K_axis_age": 2,
+    "rule_L_enabled": true,
+    "rule_L_pop": 2,
+    "rule_L_edge_ratio_min": 0.85,
+    "rule_L_edge_ratio_max": 0.87
+  },
+  "qualitative": {
+    "fitness_factor_scale": 0.02,
+    "pace_factor_scale": 0.03,
+    "cause_factor_scale": 0.02
+  },
+  "form_degradation": {
+    "rt_drop_threshold": 5.0,
+    "min_prior_races": 2
+  },
+  "weight_delta": {
+    "xlow_kg": 2.5,
+    "xhigh_kg": 4.0
+  },
+  "career_density": {
+    "heavy_threshold": 4.5
+  },
+  "class_up": {
+    "tier_order": {
+      "C": 0,
+      "B": 1,
+      "A": 2,
+      "S": 3
+    }
+  },
+  "race_gate": {
+    "min_ev_threshold": -10.0,
+    "min_coverage": 0.7
+  },
+  "budget_sweep": {
+    "min_P_hit": 0.27,
+    "min_ROI": -0.02
+  },
+  "stake": {
+    "fractional_kelly": 0.15,
+    "bet_unit_yen": 100,
+    "default_budget_yen": 1200
+  },
+  "kelly_stake": {
+    "_comment": "v8.4.2 Kelly fractional stake sizing + V9 refinements (V1+V4+V6 from multidim phase3). Empirical 4-year n=199 simulated profit +¥40,490 vs v8.4.1 (¥260,360 → ¥300,850), 4/5 fold CV positive, 2022 fixed +¥8,260. V4=pop2_cap (don't amplify 2nd-favorite axes — they ROI 110% / hit 27%). V6=DSLR 64-90 magic zone boost ×1.2 (cell delta +¥53k single largest contributor). V1 lives in race_gate rule_L (SKIP pop2 × edge 0.85-0.87). See apps/horse-ai/data/kelly_redux/multidim_phase3.json.",
+    "enabled": true,
+    "dslr_bands": [
+      {
+        "max": 35,
+        "multiplier": 0.667,
+        "label": "literature-peak (lift 0.65 — JP loss zone)"
+      },
+      {
+        "max": 63,
+        "multiplier": 1.0,
+        "label": "neutral mid-window"
+      },
+      {
+        "max": 9999,
+        "multiplier": 1.5,
+        "label": "JP-stakes peak (64+ days, lift 1.33)"
+      }
+    ],
+    "edge_ratio_bands": [
+      {
+        "min": 0.85,
+        "multiplier": 1.4,
+        "label": "high-conviction"
+      },
+      {
+        "min": 0.7,
+        "multiplier": 1.0,
+        "label": "neutral"
+      },
+      {
+        "min": 0.0,
+        "multiplier": 0.8,
+        "label": "low-conviction"
+      }
+    ],
+    "safety_min": 0.5,
+    "safety_max": 2.0,
+    "pop2_cap_enabled": true,
+    "dslr_64_90_boost_enabled": true,
+    "dslr_64_90_boost_factor": 1.2
+  },
+  "gate_bias": {
+    "enabled": false,
+    "default_factor": 1.0,
+    "table_path": "gate_bias_table.json",
+    "small_field_disable_threshold": 8
+  },
+  "pedigree_factor": {
+    "enabled": false,
+    "default_factor": 1.0,
+    "table_path": "sire_aptitude_v1.json",
+    "max_deviation": 0.05,
+    "include_dam_sire_on_dirt": true
+  },
+  "condition_aptitude": {
+    "enabled": true,
+    "min_past_races": 3,
+    "max_deviation": 0.1,
+    "finish_weights": {
+      "1": 1.0,
+      "2": 0.6,
+      "3": 0.4,
+      "4": 0.2,
+      "5": 0.2
+    }
+  },
+  "style_condition_bias": {
+    "enabled": true,
+    "table": {
+      "良": {
+        "逃げ": 1.0,
+        "先行": 1.0,
+        "差し": 1.0,
+        "追込": 1.0
+      },
+      "稍重": {
+        "逃げ": 1.02,
+        "先行": 1.01,
+        "差し": 0.99,
+        "追込": 0.98
+      },
+      "重": {
+        "逃げ": 1.04,
+        "先行": 1.02,
+        "差し": 0.98,
+        "追込": 0.95
+      },
+      "不良": {
+        "逃げ": 1.06,
+        "先行": 1.03,
+        "差し": 0.96,
+        "追込": 0.92
+      }
+    }
+  },
+  "class_step": {
+    "enabled": true,
+    "tier_map_path": "class_tier_map.json",
+    "step_scale": 0.03,
+    "max_deviation": 0.05
+  },
+  "weight_trend": {
+    "enabled": true,
+    "min_past_with_weight": 2,
+    "stable_threshold_kg": 4,
+    "drop_threshold_kg": 10,
+    "gain_threshold_kg": 10,
+    "stable_boost": 0.02,
+    "drop_decay": 0.05,
+    "gain_decay": 0.03,
+    "season_adjust": true,
+    "season_adjust_stable_threshold_kg": 8,
+    "season_adjust_max_past_races": 6
+  },
+  "owner_breeder": {
+    "enabled": false,
+    "owner_tier_boost": {
+      "Tier1": 0.015,
+      "Tier2": 0.005,
+      "Other": 0.0
+    },
+    "farm_tier_boost": {
+      "Tier1": 0.015,
+      "Tier2": 0.005,
+      "Other": 0.0
+    },
+    "max_total_boost": 0.03
+  },
+  "new_factors_safety_cap": {
+    "enabled": true,
+    "min": 0.85,
+    "max": 1.15
+  },
+  "dslr_factor": {
+    "_comment": "v8.3.0 days-since-last-race nonlinear bins. JSAI 2023 / Pudaruth 2020.",
+    "enabled": false,
+    "bands": [
+      {
+        "max": 7,
+        "factor": 0.95
+      },
+      {
+        "max": 13,
+        "factor": 0.99
+      },
+      {
+        "max": 35,
+        "factor": 1.04
+      },
+      {
+        "max": 63,
+        "factor": 1.03
+      },
+      {
+        "max": 120,
+        "factor": 1.0
+      },
+      {
+        "max": 9999,
+        "factor": 0.97
+      }
+    ]
+  },
+  "last_3f_factor": {
+    "_comment": "v8.3.0 上がり3F (last 3-furlong sectional) speed factor. Average over recent 3 races, parsed from past_performances[*].pace second value.",
+    "enabled": false,
+    "max_past_races": 3,
+    "min_past_races": 2,
+    "bands": [
+      {
+        "max": 33.5,
+        "factor": 1.05
+      },
+      {
+        "max": 34.5,
+        "factor": 1.03
+      },
+      {
+        "max": 35.5,
+        "factor": 1.0
+      },
+      {
+        "max": 36.5,
+        "factor": 0.98
+      },
+      {
+        "max": 99.0,
+        "factor": 0.95
+      }
+    ]
+  }
+}
